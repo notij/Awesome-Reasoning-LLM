@@ -1,4 +1,4 @@
-# Awesome-Reasoning-LLM
+# Awesome-Reasoning-Search-Augmented-LLMs
 2025 Fall CSCE-670 Project
 
 
