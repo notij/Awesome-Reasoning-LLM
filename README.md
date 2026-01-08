@@ -1,5 +1,4 @@
 # Awesome-Reasoning-Search-Augmented-LLMs
-Texas A&M University: Fall 2025 CSCE670 Project
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
