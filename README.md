@@ -4,43 +4,111 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-A curated list of **Reasoning-Search-Augmented Large Language Models**, focusing on methods that synergize **complex reasoning capabilities** (e.g., Chain-of-Thought, Tree-of-Thoughts, Self-Reflection) with **external information retrieval** (e.g., Web Search, Tool Use, Knowledge Graphs).
+A curated list of **Reasoning-Search-Augmented Large Language Models (RSA-LLMs)** — systems that treat **search as an explicit action inside an iterative reasoning loop**, rather than a one-shot “retrieve-then-generate” pipeline. :contentReference[oaicite:4]{index=4}
 
-This list covers the evolution from standard Retrieval-Augmented Generation (RAG) to autonomous **Search Agents** that interleave reasoning steps with dynamic information seeking to solve multi-hop and open-ended problems.
+This repository is the companion to our survey paper:
 
-The repository is part of our survey paper **[Reasoning-Search-Augmented LLMs: A Comprehensive Survey](Paper)** and will be continuously updated.
-
-> **NOTE 1:** To avoid ambiguity, we distinguish between **"Standard RAG"** (Retrieve-then-Generate) and **"Reasoning-Search"** (Interleaved/Agentic). This list focuses on models where the retrieval process is actively controlled by the model's reasoning process (e.g., deciding *when* to search and *what* to search for).
-
-> **NOTE 2:** In each subsection, papers are sorted chronologically. If a paper has a preprint (e.g., arXiv) version, its publication date is according to the preprint service. Otherwise, it follows the conference proceeding or journal date.
-
-> **NOTE 3:** We appreciate contributions! If you have suggested papers, feel free to reach out to [bpoudel@tamu.edu](mailto:your_email@example.com) or submit a [pull request](https://github.com/notij/Awesome-Reasoning-Search-Augmented-LLMs/pulls). For format consistency, please include: (1) the paper title with author names, (2) the publication venue/date, and (3) links to the PDF/Code.
+**_Reasoning-Search-Augmented Large Language Models: A Survey and Taxonomy_ (SemTech ’26)** :contentReference[oaicite:5]{index=5}  
+- **Authors:** Biswas Poudel*, Nilson Chapagain, Xianshun Jiang, Amit Kumar :contentReference[oaicite:6]{index=6}  
+- **Resources:** this repo is referenced in the paper as the public resource hub :contentReference[oaicite:7]{index=7}  
 
 ---
 
-## 🧩 Taxonomy
+## What counts as an RSA-LLM?
 
-![Taxonomy Diagram](Taxonomy_diagram.png)
+We define RSA-LLMs as systems implementing the loop:  
+**plan → query → retrieve → integrate → verify → stop** :contentReference[oaicite:8]{index=8}
 
-![4 Axes System Diagram](Unification_diagram.png)
+They are distinguished from “vanilla” RAG by **conditional execution**: *the decision to search depends on the evolving reasoning state*, not a static retrieval step. :contentReference[oaicite:9]{index=9}
 
-![Datasets and Benchmarks](Dataset_table.png)
+> **Scope note:** We primarily emphasize text-based knowledge access (open web, private corpora/KBs), and include tool-mediated retrieval/verification when it is coupled with evidence-seeking inside the loop. :contentReference[oaicite:10]{index=10}
 
-We categorize the field into the following key dimensions:
-- **Architecture:** Modular (Agent-based) vs. End-to-End Trained
-- **Reasoning Flow:** Sequential (Chain) vs. Hierarchical (Tree/Graph)
-- **Search Interaction:** Single-step vs. Iterative/Interleaved
-- **Feedback Mechanism:** Open-loop vs. Self-Correcting (Closed-loop)
+---
+
+## 🧩 Taxonomy (from the survey)
+
+Our survey organizes RSA-LLMs using **four system-level axes**:  
+1) **Retrieval Coupling** (how/when retrieval is invoked)  
+2) **Controller Design** *(agency architecture + reasoning topology)*  
+3) **Knowledge Source** (open web vs private vs tools/APIs/structured substrates)  
+4) **Grounding Strictness** (best-effort vs soft vs hard contracts) :contentReference[oaicite:11]{index=11}
+
+We treat the **learning signal** (**Prompting / SFT / RL**) as **orthogonal tags** that can apply to any point in this design space (i.e., not a primary taxonomy axis). :contentReference[oaicite:12]{index=12}
+
+### Figures / Tables (repo assets)
+- ![Taxonomy Diagram](Taxonomy_diagram.png)
+- ![Unification Diagram](Unification_diagram.png)
+- ![Benchmarks / Dataset Table](Dataset_table.png)
+
+> If you regenerate figures from the newest PDF, keep filenames the same so README links remain stable.
+
+---
+
+## ✅ Benchmarks & Evaluation (how papers are assessed)
+
+Evaluating reasoning–search–action systems extends beyond answer accuracy to include:
+- **Answer Quality** (EM/F1 or judge-based scores)
+- **Grounding Quality** (supporting-fact F1, citation metrics)
+- **Search Behaviour** (search steps, redundancy, latency/cost)
+- **Tool Correctness** (tool-call success, argument/AST correctness) :contentReference[oaicite:13]{index=13}
+
+Table 1 in the survey summarizes representative datasets spanning single-step retrieval → long-horizon, multi-tool reasoning, organized by which part of the loop they stress-test. :contentReference[oaicite:14]{index=14}
+
+---
 
 ## Contents
+
+### Taxonomy-first navigation (matches the survey)
+- [Axis 1: Retrieval Coupling](#axis-1-retrieval-coupling)
+- [Axis 2: Controller Design](#axis-2-controller-design)
+- [Axis 3: Knowledge Source](#axis-3-knowledge-source)
+- [Axis 4: Grounding Strictness](#axis-4-grounding-strictness)
+- [Orthogonal Tags: Learning Signal](#orthogonal-tags-learning-signal)
+
+### Paper list (current repo organization; will be progressively tagged by axes)
 - [Reinforcement-Learning-Based](#reinforcement-learning-based)
-  - [Single‑Controller RL Agents](#Single-Agents)
-  - [Multi‑Agent / Modular RL Frameworks](#Multi‑Agent)
-  - [Efficiency and Long‑Horizon RL](#Long-Horizon)
+  - [Single-Controller RL Agents](#single-agents)
+  - [Multi-Agent / Modular RL Frameworks](#multi-agent)
+  - [Efficiency and Long-Horizon RL](#long-horizon)
 - [Prompt-Based and Supervised Search Agents](#prompt-based-and-supervised-search-agents)
-- [Tree‑Search and Hierarchical Planning Approaches](#tree-search-and-hierarchical-planning-approaches)  
+- [Tree-Search and Hierarchical Planning Approaches](#tree-search-and-hierarchical-planning-approaches)
 - [Retrieval-Augmented Generation Variants](#retrieval-augmented-generation-variants)
 - [Knowledge Graph & Structured Retrieval](#knowledge-graph--structured-retrieval)
+
+---
+
+## Axis 1: Retrieval Coupling
+
+**Retrieval coupling** describes *when* the system searches, *what* it queries, and *when* it stops searching. :contentReference[oaicite:15]{index=15}  
+Common regimes (as used in the survey’s overview figure): **Scheduled**, **Adaptive**, **Stateful**. :contentReference[oaicite:16]{index=16}
+
+## Axis 2: Controller Design
+
+Controller design specifies **where control lives** and **how inference is organized**, decomposed as:
+- **Agency architecture:** single-agent vs modular vs multi-agent :contentReference[oaicite:17]{index=17}
+- **Reasoning topology:** linear vs branching vs graph :contentReference[oaicite:18]{index=18}
+
+## Axis 3: Knowledge Source
+
+Knowledge sources include **open web**, **private corpora/KBs**, and **tools/APIs / structured substrates (e.g., KGs)**. :contentReference[oaicite:19]{index=19}
+
+## Axis 4: Grounding Strictness
+
+Grounding strictness ranges from:
+- **Best-effort** (no strict contract),
+- **Soft** (self-critique / revise / heuristics),
+- **Hard** (must-ground / cite / abstain if insufficient evidence). :contentReference[oaicite:20]{index=20}
+
+## Orthogonal Tags: Learning Signal
+
+We tag systems by the **learning signal** used to instantiate the loop behavior:
+- **Prompting**, **SFT**, **RL** (orthogonal to the four axes). :contentReference[oaicite:21]{index=21}
+
+> Planned: add compact tags to each paper like  
+> `[Coupling: Adaptive] [Agency: Single] [Topology: Linear] [Source: OpenWeb] [Grounding: Soft] [Signal: RL]`
+
+---
+
 
 ## 📚 Paper List
 
