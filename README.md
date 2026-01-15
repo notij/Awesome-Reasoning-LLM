@@ -4,24 +4,24 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-A curated list of **Reasoning-Search-Augmented Large Language Models (RSA-LLMs)** — systems that treat **search as an explicit action inside an iterative reasoning loop**, rather than a one-shot “retrieve-then-generate” pipeline. :contentReference[oaicite:4]{index=4}
+A curated list of **Reasoning-Search-Augmented Large Language Models (RSA-LLMs)** — systems that treat **search as an explicit action inside an iterative reasoning loop**, rather than a one-shot “retrieve-then-generate” pipeline.
 
 This repository is the companion to our survey paper:
 
-**_Reasoning-Search-Augmented Large Language Models: A Survey and Taxonomy_ (SemTech ’26)** :contentReference[oaicite:5]{index=5}  
-- **Authors:** Biswas Poudel*, Nilson Chapagain, Xianshun Jiang, Amit Kumar :contentReference[oaicite:6]{index=6}  
-- **Resources:** this repo is referenced in the paper as the public resource hub :contentReference[oaicite:7]{index=7}  
+**_Reasoning-Search-Augmented Large Language Models: A Survey and Taxonomy_ (SemTech ’26)**
+- **Authors:** Biswas Poudel*, Nilson Chapagain, Xianshun Jiang, Amit Kumar  
+- **Resources:** this repo is referenced in the paper as the public resource hub
 
 ---
 
 ## What counts as an RSA-LLM?
 
 We define RSA-LLMs as systems implementing the loop:  
-**plan → query → retrieve → integrate → verify → stop** :contentReference[oaicite:8]{index=8}
+**plan → query → retrieve → integrate → verify → stop**
 
-They are distinguished from “vanilla” RAG by **conditional execution**: *the decision to search depends on the evolving reasoning state*, not a static retrieval step. :contentReference[oaicite:9]{index=9}
+They are distinguished from “vanilla” RAG by **conditional execution**: *the decision to search depends on the evolving reasoning state*, not a static retrieval step.
 
-> **Scope note:** We primarily emphasize text-based knowledge access (open web, private corpora/KBs), and include tool-mediated retrieval/verification when it is coupled with evidence-seeking inside the loop. :contentReference[oaicite:10]{index=10}
+> **Scope note:** We primarily emphasize text-based knowledge access (open web, private corpora/KBs), and include tool-mediated retrieval/verification when it is coupled with evidence-seeking inside the loop.
 
 ---
 
@@ -31,16 +31,14 @@ Our survey organizes RSA-LLMs using **four system-level axes**:
 1) **Retrieval Coupling** (how/when retrieval is invoked)  
 2) **Controller Design** *(agency architecture + reasoning topology)*  
 3) **Knowledge Source** (open web vs private vs tools/APIs/structured substrates)  
-4) **Grounding Strictness** (best-effort vs soft vs hard contracts) :contentReference[oaicite:11]{index=11}
+4) **Grounding Strictness** (best-effort vs soft vs hard contracts)
 
-We treat the **learning signal** (**Prompting / SFT / RL**) as **orthogonal tags** that can apply to any point in this design space (i.e., not a primary taxonomy axis). :contentReference[oaicite:12]{index=12}
+We treat the **learning signal** (**Prompting / SFT / RL**) as **orthogonal tags** that can apply to any point in this design space (i.e., not a primary taxonomy axis).
 
 ### Figures / Tables (repo assets)
 - ![Taxonomy Diagram](Taxonomy_diagram.png)
 - ![Unification Diagram](Unification_diagram.png)
 - ![Benchmarks / Dataset Table](Dataset_table.png)
-
-> If you regenerate figures from the newest PDF, keep filenames the same so README links remain stable.
 
 ---
 
@@ -50,9 +48,9 @@ Evaluating reasoning–search–action systems extends beyond answer accuracy to
 - **Answer Quality** (EM/F1 or judge-based scores)
 - **Grounding Quality** (supporting-fact F1, citation metrics)
 - **Search Behaviour** (search steps, redundancy, latency/cost)
-- **Tool Correctness** (tool-call success, argument/AST correctness) :contentReference[oaicite:13]{index=13}
+- **Tool Correctness** (tool-call success, argument/AST correctness)
 
-Table 1 in the survey summarizes representative datasets spanning single-step retrieval → long-horizon, multi-tool reasoning, organized by which part of the loop they stress-test. :contentReference[oaicite:14]{index=14}
+Table 1 in the survey summarizes representative datasets spanning single-step retrieval → long-horizon, multi-tool reasoning, organized by which part of the loop they stress-test.
 
 ---
 
@@ -65,44 +63,34 @@ Table 1 in the survey summarizes representative datasets spanning single-step re
 - [Axis 4: Grounding Strictness](#axis-4-grounding-strictness)
 - [Orthogonal Tags: Learning Signal](#orthogonal-tags-learning-signal)
 
-### Paper list (current repo organization; will be progressively tagged by axes)
-- [Reinforcement-Learning-Based](#reinforcement-learning-based)
-  - [Single-Controller RL Agents](#single-agents)
-  - [Multi-Agent / Modular RL Frameworks](#multi-agent)
-  - [Efficiency and Long-Horizon RL](#long-horizon)
-- [Prompt-Based and Supervised Search Agents](#prompt-based-and-supervised-search-agents)
-- [Tree-Search and Hierarchical Planning Approaches](#tree-search-and-hierarchical-planning-approaches)
-- [Retrieval-Augmented Generation Variants](#retrieval-augmented-generation-variants)
-- [Knowledge Graph & Structured Retrieval](#knowledge-graph--structured-retrieval)
-
 ---
 
 ## Axis 1: Retrieval Coupling
 
-**Retrieval coupling** describes *when* the system searches, *what* it queries, and *when* it stops searching. :contentReference[oaicite:15]{index=15}  
-Common regimes (as used in the survey’s overview figure): **Scheduled**, **Adaptive**, **Stateful**. :contentReference[oaicite:16]{index=16}
+**Retrieval coupling** describes *when* the system searches, *what* it queries, and *when* it stops searching. 
+Common regimes (as used in the survey’s overview figure): **Scheduled**, **Adaptive**, **Stateful**.
 
 ## Axis 2: Controller Design
 
 Controller design specifies **where control lives** and **how inference is organized**, decomposed as:
-- **Agency architecture:** single-agent vs modular vs multi-agent :contentReference[oaicite:17]{index=17}
-- **Reasoning topology:** linear vs branching vs graph :contentReference[oaicite:18]{index=18}
+- **Agency architecture:** single-agent vs modular vs multi-agent
+- **Reasoning topology:** linear vs branching vs graph
 
 ## Axis 3: Knowledge Source
 
-Knowledge sources include **open web**, **private corpora/KBs**, and **tools/APIs / structured substrates (e.g., KGs)**. :contentReference[oaicite:19]{index=19}
+Knowledge sources include **open web**, **private corpora/KBs**, and **tools/APIs / structured substrates (e.g., KGs)**.
 
 ## Axis 4: Grounding Strictness
 
 Grounding strictness ranges from:
 - **Best-effort** (no strict contract),
 - **Soft** (self-critique / revise / heuristics),
-- **Hard** (must-ground / cite / abstain if insufficient evidence). :contentReference[oaicite:20]{index=20}
+- **Hard** (must-ground / cite / abstain if insufficient evidence).
 
 ## Orthogonal Tags: Learning Signal
 
 We tag systems by the **learning signal** used to instantiate the loop behavior:
-- **Prompting**, **SFT**, **RL** (orthogonal to the four axes). :contentReference[oaicite:21]{index=21}
+- **Prompting**, **SFT**, **RL** (orthogonal to the four axes).
 
 > Planned: add compact tags to each paper like  
 > `[Coupling: Adaptive] [Agency: Single] [Topology: Linear] [Source: OpenWeb] [Grounding: Soft] [Signal: RL]`
@@ -112,20 +100,181 @@ We tag systems by the **learning signal** used to instantiate the loop behavior:
 
 ## 📚 Paper List
 
-### Reinforcement-Learning-Based
-<h3 id="Single-Agents">Single‑Controller RL Agents</h3>
+### Axis 1: Retrieval Coupling
+<h3 id="Scheduled">Scheduled/Static Coupling</h3>
 
-- **(Search-R1)** Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning ```COLM 2025```     
-[[Paper](https://arxiv.org/abs/2503.09516)] [[GitHub](https://github.com/PeterGriffinJin/Search-R1)] [[Models](https://huggingface.co/collections/PeterJinGo/search-r1)]
+- **(RAG)** Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks ```NeurIPS 2022```     
+[[Paper](https://proceedings.neurips.cc/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf)]
+
+- **(FiD)** Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering ```EACL 2021 ```
+[[Paper](https://aclanthology.org/2021.eacl-main.74.pdf)]
+
+<h3 id="Adaptive">Adaptive Coupling via on-demand controller</h3>
+
+- **(Search-R1)** Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning ```COLM 2025```
+[[Paper](https://arxiv.org/abs/2503.09516)] [[Github](https://github.com/PeterGriffinJin/Search-R1)] [[Models](https://huggingface.co/collections/PeterJinGo/search-r1)]
+
+- **(StepSearch)** StepSearch: Igniting LLMs Search Ability via Step-Wise Proximal Policy Optimization ```EMNLP 2025```     
+[[Paper](https://arxiv.org/abs/2505.15107)] [[GitHub](https://github.com/Zillwang/StepSearch)] [[Model (3B Base)](https://huggingface.co/Zill1/StepSearch-3B-Base/tree/main)] [[Model (7B Base)](https://huggingface.co/Zill1/StepSearch-7B-Base/tree/main)] [[Model (3B Instruct)](https://huggingface.co/Zill1/StepSearch-3B-Instruct/tree/main)] [[Model (7B Instruct)](https://huggingface.co/Zill1/StepSearch-7B-Instruct/tree/main)] [[Dataset](https://huggingface.co/datasets/Zill1/StepSearch-musi-dataset)]
 
 - **(ZeroSearch)** ZeroSearch: Incentivize the Search Capability of LLMs without Searching ```arXiv 2025```     
 [[Paper](https://arxiv.org/abs/2505.04588)] [[GitHub](https://github.com/Alibaba-NLP/ZeroSearch)] [[Models](https://huggingface.co/collections/sunhaonlp/zerosearch-policy-google-v1)]
 
-- **(ReSearch)** ReSearch: Learning to Reason with Search for LLMs via Reinforcement Learning ```arXiv 2025```     
+- **(ReSearch)** ReSearch: Learning to Reason with Search for LLMs via Reinforcement Learning ```NeurIPS 2025```     
 [[Paper](https://arxiv.org/abs/2503.19470)] [[GitHub](https://github.com/Agent-RL/ReCall)] [[Models](https://huggingface.co/collections/agentrl/research)]
 
-- **(StepSearch)** StepSearch: Igniting LLMs Search Ability via Step-Wise Proximal Policy Optimization ```EMNLP 2025```     
-[[Paper](https://arxiv.org/abs/2505.15107)] [[GitHub](https://github.com/Zillwang/StepSearch)] [[Model (3B Base)](https://huggingface.co/Zill1/StepSearch-3B-Base/tree/main)] [[Model (7B Base)](https://huggingface.co/Zill1/StepSearch-7B-Base/tree/main)] [[Model (3B Instruct)](https://huggingface.co/Zill1/StepSearch-3B-Instruct/tree/main)] [[Model (7B Instruct)](https://huggingface.co/Zill1/StepSearch-7B-Instruct/tree/main)] [[Dataset](https://huggingface.co/datasets/Zill1/StepSearch-musi-dataset)]
+- **(ReAct)** ReAct: Synergizing Reasoning and Acting in Language Models ```ICLR 2023```
+[[Paper](https://openreview.net/pdf?id=WE_vluYUL-X)] [[GitHub](https://react-lm.github.io/)]
+
+- **(Search-o1)** Search-o1: Agentic Search-Enhanced Large Reasoning Models ```EMNLP 2025 (Oral)```     
+[[Paper](https://arxiv.org/abs/2501.05366)] [[GitHub](https://github.com/RUC-NLPIR/Search-o1)] [[Project](https://search-o1.github.io/)]
+
+<h3 id="Stateful">Stateful evidence accumulation</h3>
+
+- **(ReSum)** ReSum: Unlocking Long-Horizon Search Intelligence via Context Summarization ```arXiv 2025```     
+[[Paper](https://arxiv.org/abs/2509.13313)] [[GitHub](https://github.com/Alibaba-NLP/DeepResearch)] [[Model (30B)](https://huggingface.co/Alibaba-NLP/Tongyi-DeepResearch-30B-A3B)] [[Blog](https://tongyi-agent.github.io/blog/introducing-tongyi-deep-research/)]
+
+- **(MemSearcher)** MemSearcher: Training LLMs to Reason, Search and Manage Memory via End-to-End Reinforcement Learning ```arXiv 2025```     
+[[Paper](https://arxiv.org/abs/2511.02805)] [[GitHub](https://github.com/icip-cas/MemSearcher)] 
+
+### Axis 2: Controller Design
+<h3 id="Agency">Agency Architecture (Who runs the loop)</h3>
+<h4 id="Single-Agent"></h4>h4>
+
+- **(ReAct)** ReAct: Synergizing Reasoning and Acting in Language Models ```ICLR 2023```
+[[Paper](https://openreview.net/pdf?id=WE_vluYUL-X)] [[GitHub](https://react-lm.github.io/)]
+
+- **(Search-R1)** Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning ```COLM 2025```
+[[Paper](https://arxiv.org/abs/2503.09516)] [[Github](https://github.com/PeterGriffinJin/Search-R1)] [[Models](https://huggingface.co/collections/PeterJinGo/search-r1)]
+
+- **(Search-o1)** Search-o1: Agentic Search-Enhanced Large Reasoning Models ```EMNLP 2025 (Oral)```     
+[[Paper](https://arxiv.org/abs/2501.05366)] [[GitHub](https://github.com/RUC-NLPIR/Search-o1)] [[GitHub](https://search-o1.github.io/)]
+
+<h4 id="Modular">Modular</h4>h4>
+
+- **(HuggingGPT)** HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face ```NeurIPS 2023```
+[[Paper]](https://proceedings.neurips.cc/paper_files/paper/2023/file/77c33e6a367922d003ff102ffb92b658-Paper-Conference.pdf)] [[GitHub](https://github.com/microsoft/JARVIS)]
+
+- **(VerlTool)** VerlTool: Towards Holistic Agentic Reinforcement Learning with Tool Use ```arXiv 2025```
+[[Paper](https://arxiv.org/abs/2509.01055)] [[GitHub](https://github.com/TIGER-AI-Lab/verl-tool)]
+
+<h4 id="Multi-Agent">Multi-Agent</h4>h4>
+
+- **(MAD)** Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate ```EMNLP 2024```
+[[Paper](https://aclanthology.org/2024.emnlp-main.992.pdf)] [[GitHub](https://github.com/Skytliang/Multi-Agents-Debate)
+
+- **(DeepResearcher)** DeepResearcher: Scaling Deep Research via Reinforcement Learning in Real-world Environments ```EMNLP 2025```
+[[Paper](https://arxiv.org/abs/2504.03160)] [[GitHub](https://github.com/GAIR-NLP/DeepResearcher)]
+
+<h3 id="Topology">Reasoning Topology (how inference is structured)</h3>
+<h4 id="Linear">Linear</h4>
+
+- **(CoT)** Chain-of-Thought Prompting Elicits Reasoning in Large Language Models ```NeurIPS 2022```
+[[Paper](https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf)]
+
+<h4 id="Branching">Branching</h4>
+
+- **(ToT)** Tree of Thoughts: Deliberate Problem Solving with Large Language ModelS ```NeurIPS 2023```
+[[Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/271db9922b8d1f4dd7aaef84ed5ac703-Paper-Conference.pdf)] [[GitHub](https://github.com/princeton-nlp/tree-of-thought-llm)]
+
+- **(MCTS)** A Survey of Monte Carlo Tree Search Methods ```IEEE 2012```
+[[Paper](https://repository.essex.ac.uk/4117/1/MCTS-Survey.pdf)] 
+
+<h4 id="Graph">Graph</h4>
+
+- **(GoT)** Graph of Thoughts: Solving Elaborate Problems with Large Language Models ```AAAI 2024```
+[[Paper](https://ojs.aaai.org/index.php/AAAI/article/view/29720/31236)] [[GitHub](https://github.com/spcl/graph-of-thoughts)]
+
+- **(ToG)** Think-on-Graph: Deep and Responsible Reasoning of Large Language Models on Knowledge Graphs ```ICLR 2024```
+[[Paper](https://arxiv.org/abs/2307.07697)] [[GitHub](https://github.com/DataArcTech/ToG)]
+
+- **(GraphReader)** GraphReader: Building Graphbased Agent to Enhance Long-Context Abilities of Large Language Models ```arXiv 2024```
+[[Paper](https://arxiv.org/abs/2406.14550)]
+
+### Axis 3: Knowledge Source
+<h3 id="Open Web">Open-world unstructured sources</h3>
+
+- **(WebGPT)** WebGPT: Browser-assisted question-answering with human feedback ```arXiv 2022```
+[[Paper](https://arxiv.org/abs/2112.09332)]
+
+- **(DPR)**  Dense Passage Retrieval for OpenDomain Question Answering ```EMNLP 2020```
+[[Paper](https://arxiv.org/pdf/2004.04906v2/1000)] [[Project](https://fburl.com/qa-dpr)]
+
+- **(REALM)** REALM: Retrieval-Augmented Language Model Pre-Training ```ICML 2020```
+[[Paper](https://proceedings.mlr.press/v119/guu20a.html?ref=http://githubhelp.com)]
+
+<h3 id="Private">Private collections</h3>
+
+- **(KILT)** KILT: A Benchmark for Knowledge-Intensive Language Tasks ```NAACL-HLT 2021```
+[[Paper](https://aclanthology.org/2021.naacl-main.200/)] [[GitHub](https://github.com/facebookresearch/KILT)]
+
+- **(RETRO)**  Improving Language Models by Retrieving from Trillions of Tokens ```ICML 2022```
+[[Paper](https://proceedings.mlr.press/v162/borgeaud22a/borgeaud22a.pdf)]
+
+<h3 id="Structured">Structured environments (tools, DBs, APIs, KBs, simulators)</h3>
+
+- **(MRKL)** MRKL Systems: A Modular, Neuro-Symbolic Architecture that Combines Large Language Models, External Knowledge Sources and
+Discrete Reasoning ```arXiv 2022```
+[[Paper](https://arxiv.org/abs/2205.00445)]
+
+- **(Toolformer)** Toolformer: Language Models Can Teach Themselves to Use Tools ```NeurIPS 2023```
+[[Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/d842425e4bf79ba039352da0f658a906-Paper-Conference.pdf)]
+
+- **(PAL)** PAL: Program-Aided Language Models ```ICML 2022```
+[[Paper](https://proceedings.mlr.press/v202/gao23f/gao23f.pdf)] [[Project](https://reasonwithpal.com/)]
+
+- **(ToolLLM)** ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs ```arXiv 2023```
+[[Paper](https://arxiv.org/abs/2307.16789)] [[GitHub](https://github.com/OpenBMB/ToolBench)]
+
+### Axis 4: Evidence Strictness
+<h3 id="Best-effort">Best-effort (no explicit contract)</h3>
+
+- **(RAG)** Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks ```NeurIPS 2022```     
+[[Paper](https://proceedings.neurips.cc/paper/2020/file/6b493230205f780e1bc26945df7481e5-Paper.pdf)]
+
+- **(FiD)** Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering ```EACL 2021 ```
+[[Paper](https://aclanthology.org/2021.eacl-main.74.pdf)]
+
+<h3 id="soft">Soft grounding (preferences/penalties)</h3>
+
+- **(Self-RAG)** Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection ```ICLR 2024```
+[[Paper](https://par.nsf.gov/servlets/purl/10539591)] [[GitHub](https://selfrag.github.io/)]
+
+- **(RARR)** RARR: Researching and Revising What Language Models Say, Using Language Models ```ACL 2023```
+[[Paper](https://aclanthology.org/2023.acl-long.910.pdf)] [[GitHub](https://github.com/anthonywchen/RARR)]
+
+- **(Reflexion)** Reflexion: Language Agents with Verbal Reinforcement Learning ```NeurIPS 2023```
+[[Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/1b44b878bb782e6954cd888628510e90-Paper-Conference.pdf)] [[GitHub](https://github.com/noahshinn/reflexion)]
+
+<h3 id="hard">Hard grounding (must-cite/abstain)</h3>
+
+- **(WebGPT)** WebGPT: Browser-assisted question-answering with human feedback ```arXiv 2022```
+[[Paper](https://arxiv.org/abs/2112.09332)]
+
+- **(GopherCite)** Teaching language models to support answers with verified quotes ```arXiv 2022```
+[[Paper](https://arxiv.org/abs/2203.11147)]
+
+- **(ALCE)** Enabling Large Language Models to Generate Text with Citations ```EMNLP 2023```
+[[Paper](https://aclanthology.org/anthology-files/anthology-files/pdf/emnlp/2023.emnlp-main.398.pdf)] [[GitHub](https://github.com/princeton-nlp/ALCE)]
+
+---
+
+## Contributing
+
+PRs are welcome! Please include:
+1) Paper title + authors  
+2) Venue/date (use arXiv date if applicable; otherwise proceedings date)  
+3) Links to PDF and code (if available)  
+4) (Optional) Taxonomy tags: Retrieval coupling / Controller design / Knowledge source / Grounding strictness
+
+Contact: **bpoudel@tamu.edu**, **xianshun@tamu.edu**
+
+
+<!--
+%%%%%%%%%%%%%%%%%%%% Previous version %%%%%%%%%%%%%%%%%%
+
+- **(ZeroSearch)** ZeroSearch: Incentivize the Search Capability of LLMs without Searching ```arXiv 2025```     
+[[Paper](https://arxiv.org/abs/2505.04588)] [[GitHub](https://github.com/Alibaba-NLP/ZeroSearch)] [[Models](https://huggingface.co/collections/sunhaonlp/zerosearch-policy-google-v1)]
 
 - **(Stratified GRPO)** Stratified GRPO: Handling Structural Heterogeneity in Reinforcement Learning of LLM Search Agents ```arXiv 2025```     
 [[Paper](https://arxiv.org/abs/2510.06214)] 
@@ -146,8 +295,7 @@ We tag systems by the **learning signal** used to instantiate the loop behavior:
  ```AAAI 2026```     
 [[Paper](https://arxiv.org/abs/2511.07943)] [[GitHub](https://github.com/OpenSPG/KAG-Thinker)] [[Model (7B)](https://huggingface.co/OpenSPG/KAG-Thinker-en-7b-instruct)] [[Dataset](https://huggingface.co/datasets/OpenSPG/KAG-Thinker-training-dataset)]
 
-- **(MemSearcher)** MemSearcher: Training LLMs to Reason, Search and Manage Memory via End-to-End Reinforcement Learning ```arXiv 2025```     
-[[Paper](https://arxiv.org/abs/2511.02805)] [[GitHub](https://github.com/icip-cas/MemSearcher)] 
+
 
 - **(R1-Searcher)** R1-Searcher: Incentivizing the Search Capability in LLMs via Reinforcement Learning ```arXiv 2025```     
 [[Paper](https://arxiv.org/abs/2503.05592)] [[GitHub](https://github.com/RUCAIBox/R1-Searcher)] [[Model (Qwen)]( https://huggingface.co/XXsongLALA/Qwen-2.5-7B-base-RAG-RL)] [[Model (Llama)](https://huggingface.co/XXsongLALA/Llama-3.1-8B-instruct-RAG-RL)] [[Dataset](https://huggingface.co/datasets/XXsongLALA/RAG-RL-Hotpotqa-with-2wiki)]
@@ -158,8 +306,7 @@ We tag systems by the **learning signal** used to instantiate the loop behavior:
 - **(RAG-R1)** RAG-R1: Incentivizing the Search and Reasoning Capabilities of LLMs through Multi-query Parallelism ```arXiv 2025```     
 [[Paper](https://arxiv.org/abs/2507.02962)] [[GitHub](https://github.com/inclusionAI/AWorld-RL/tree/main/RAG-R1)] [[Models](https://huggingface.co/collections/endertzw/rag-r1)]
 
-- **(ReSum)** ReSum: Unlocking Long-Horizon Search Intelligence via Context Summarization ```arXiv 2025```     
-[[Paper](https://arxiv.org/abs/2509.13313)] [[GitHub](https://github.com/Alibaba-NLP/DeepResearch)] [[Model (30B)](https://huggingface.co/Alibaba-NLP/Tongyi-DeepResearch-30B-A3B)] [[Blog](https://tongyi-agent.github.io/blog/introducing-tongyi-deep-research/)]
+
 
 - **(SEM)** SEM: Reinforcement Learning for Search-Efficient Large Language Models ```arXiv 2025```     
 [[Paper](https://arxiv.org/abs/2505.07903)] 
@@ -218,8 +365,7 @@ We tag systems by the **learning signal** used to instantiate the loop behavior:
 [[Paper](https://arxiv.org/abs/2511.02805)] [[GitHub](https://github.com/icip-cas/MemSearcher)] 
 
 ### Prompt-Based and Supervised Search Agents
-- **(Search-o1)** Search-o1: Agentic Search-Enhanced Large Reasoning Models ```EMNLP 2025 (Oral)```     
-[[Paper](https://arxiv.org/abs/2501.05366)] [[GitHub](https://github.com/RUC-NLPIR/Search-o1)] [[Project](https://search-o1.github.io/)] 
+
 
 - **(AutoRefine)** Search and Refine During Think: Facilitating Knowledge Refinement for Improved Retrieval-Augmented Reasoning ```NeurIPS 2025 (Poster)```     
 [[Paper](https://arxiv.org/abs/2505.11277)] [[GitHub](https://github.com/syr-cn/AutoRefine)] [[Model (3B)](https://huggingface.co/yrshi/AutoRefine-Qwen2.5-3B-Base)]
@@ -288,3 +434,4 @@ We tag systems by the **learning signal** used to instantiate the loop behavior:
 - **(PAR-RAG)** Credible Plan-Driven RAG Method for Multi-Hop Question Answering ```arXiv 2025```     
 [[Paper](https://arxiv.org/abs/2504.16787)] 
 
+-->
